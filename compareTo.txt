@@ -1,0 +1,48 @@
+package 每日一题.大整数排序;
+
+
+//用到了  Comparable  的   compareTo
+
+import java.util.*;
+
+class BigNum implements Comparable<BigNum> {
+    String bignum;
+    public BigNum(String bignum){
+        this.bignum = bignum;
+    }
+    @Override
+    public int compareTo(BigNum o) {
+        int num1 = this.bignum.length();
+        int num2 = o.bignum.length();
+        if(num1 != num2)
+            return num1 - num2;
+        else{
+            char[] chars1 = this.bignum.toCharArray();
+            char[] chars2 = o.bignum.toCharArray();
+            for(int i=0; i<chars1.length; i++){
+                if(chars1[i] != chars2[i])
+                    return (int)chars1[i] - (int)chars2[i];
+            }
+        }
+        return 0;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc =  new Scanner(System.in);
+        while(sc.hasNext()){
+            int N = sc.nextInt();
+            BigNum[] bigNums = new BigNum[N];
+            int i = 0;
+            while(N!=0){
+                String str = sc.next();
+                bigNums[i++] = new BigNum(str);
+                N--;
+            }
+            Arrays.sort(bigNums);
+            for(BigNum Num : bigNums)
+                System.out.println(Num.bignum);
+        }
+    }
+}
